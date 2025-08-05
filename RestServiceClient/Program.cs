@@ -1,7 +1,10 @@
-﻿// Chamada HTTP para https://localhost:7262/weatherforecast
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
 using var httpClient = new HttpClient();
+
+const string port = "8083"; // "7262";
+
+Console.WriteLine($"Starting REST client listen port {port}...");
 
 var myTasks = new List<Task>();
 var stopwatch = Stopwatch.StartNew();
@@ -16,7 +19,7 @@ Console.WriteLine($"Tempo gasto para execução do for: {stopwatch.Elapsed}");
 
 static async Task RequestRest(HttpClient httpClient, int i)
 {
-    var response = await httpClient.GetAsync("https://localhost:7262/weatherforecast");
+    var response = await httpClient.GetAsync($"https://localhost:{port}/weatherforecast");
     response.EnsureSuccessStatusCode();
     var content = await response.Content.ReadAsStringAsync();
     Console.WriteLine($"Resposta da API weatherforecast:{i}");

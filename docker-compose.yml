@@ -1,0 +1,13 @@
+services:
+  grpcserviceclient:
+    image: ${DOCKER_REGISTRY-}grpcserviceclient
+    build:
+      context: .
+      dockerfile: GrpcServiceClient/Dockerfile
+
+  restserviceclient:
+    image: ${DOCKER_REGISTRY-}restserviceclient
+    build:
+      context: .
+      dockerfile: RestServiceClient/Dockerfile
+

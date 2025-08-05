@@ -2,8 +2,12 @@
 using Grpc.Net.Client;
 using GrpcGreeterClient;
 
+const string port = "8081"; // "7246";
+
+Console.WriteLine($"Starting gRPC client listen port {port}...");
+
 // The port number must match the port of the gRPC server.
-using var channel = GrpcChannel.ForAddress("https://localhost:7246");
+using var channel = GrpcChannel.ForAddress($"https://localhost:{port}");
 var client = new Greeter.GreeterClient(channel);
 
 var myTasks = new List<Task>();

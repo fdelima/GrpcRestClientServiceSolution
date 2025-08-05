@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "RestServiceClient": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}
