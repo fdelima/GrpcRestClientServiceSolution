@@ -16,7 +16,7 @@ var stopwatch = Stopwatch.StartNew();
 for (int i = 0; i < 250000; i++)
 {
     if (i > 0 && i % 50000 == 0)
-        Console.WriteLine($"Send 50.000 sayHello: {DateTime.Now:HHmmss}");
+        Console.WriteLine($"Send 50.000 sayHello: {DateTime.Now:HH:mm:ss}");
 
     myTasks.Add(sayHello(client, i));
 }
@@ -25,7 +25,7 @@ Task.WaitAll(myTasks);
 stopwatch.Stop();
 Console.WriteLine($"Tempo gasto para execução de 250.000: {stopwatch.Elapsed}");
 
-static async Task sayHello(Greeter.GreeterClient client, int i)
+async Task sayHello(Greeter.GreeterClient client, int i)
 {
     var reply = await client.SayHelloAsync(
         new HelloRequest { Name = $"GreeterClient::{i}", Count = i.ToString() });

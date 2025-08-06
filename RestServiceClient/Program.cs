@@ -11,7 +11,7 @@ var stopwatch = Stopwatch.StartNew();
 for (int i = 0; i < 250000; i++)
 {
     if (i > 0 && i % 50000 == 0)
-        Console.WriteLine($"Send 50.000 requests: {DateTime.Now:HHmmss}");
+        Console.WriteLine($"Send 50.000 requests: {DateTime.Now:HH:mm:ss}");
 
     myTasks.Add(RequestRest(httpClient, i));
 }
@@ -20,9 +20,9 @@ Task.WaitAll(myTasks);
 stopwatch.Stop();
 Console.WriteLine($"Tempo gasto para execução de 250.000: {stopwatch.Elapsed}");
 
-static async Task RequestRest(HttpClient httpClient, int i)
+async Task RequestRest(HttpClient httpClient, int i)
 {
-    var response = await httpClient.GetAsync($"http://webapirest:{port}/weatherforecast");
+    var response = await httpClient.GetAsync($"http://restserviceserver:{port}/weatherforecast/{i}");
     //var response = await httpClient.GetAsync($"http://localhost:{port}/weatherforecast");
     response.EnsureSuccessStatusCode();
     var content = await response.Content.ReadAsStringAsync();
