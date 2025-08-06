@@ -2,26 +2,29 @@
 
 using var httpClient = new HttpClient();
 
-const string port = "8083"; // "7262";
+const string port = "8082"; // "7262";
 
 Console.WriteLine($"Starting REST client listen port {port}...");
 
 var myTasks = new List<Task>();
 var stopwatch = Stopwatch.StartNew();
-for (int i = 0; i < 100000; i++)
+for (int i = 0; i < 250000; i++)
 {
+    if (i > 0 && i % 50000 == 0)
+        Console.WriteLine($"Send 50.000 requests: {DateTime.Now:HHmmss}");
+
     myTasks.Add(RequestRest(httpClient, i));
 }
 Task.WaitAll(myTasks);
 
 stopwatch.Stop();
-Console.WriteLine($"Tempo gasto para execução do for: {stopwatch.Elapsed}");
+Console.WriteLine($"Tempo gasto para execução de 250.000: {stopwatch.Elapsed}");
 
 static async Task RequestRest(HttpClient httpClient, int i)
 {
-    var response = await httpClient.GetAsync($"https://localhost:{port}/weatherforecast");
+    var response = await httpClient.GetAsync($"http://webapirest:{port}/weatherforecast");
+    //var response = await httpClient.GetAsync($"http://localhost:{port}/weatherforecast");
     response.EnsureSuccessStatusCode();
     var content = await response.Content.ReadAsStringAsync();
-    Console.WriteLine($"Resposta da API weatherforecast:{i}");
+    //Console.WriteLine($"Resposta da API weatherforecast:{i}");
 }
-//Tempo gasto para execução do for: 00:00:03.8973082
