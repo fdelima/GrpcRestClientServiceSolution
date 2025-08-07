@@ -23,8 +23,6 @@ Console.WriteLine($"Tempo gasto para execução de 250.000: {stopwatch.Elapsed}"
 async Task RequestRest(HttpClient httpClient, int i)
 {
     var response = await httpClient.GetAsync($"http://restserviceserver:{port}/weatherforecast/{i}");
-    //var response = await httpClient.GetAsync($"http://localhost:{port}/weatherforecast");
     response.EnsureSuccessStatusCode();
     var content = await response.Content.ReadAsStringAsync();
-    //Console.WriteLine($"Resposta da API weatherforecast:{i}");
 }

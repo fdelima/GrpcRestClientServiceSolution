@@ -8,7 +8,6 @@ Console.WriteLine($"Starting gRPC client listen port {port}...");
 
 // The port number must match the port of the gRPC server.
 using var channel = GrpcChannel.ForAddress($"http://grpcserviceserver:{port}");
-//using var channel = GrpcChannel.ForAddress($"http://localhost:{port}");
 var client = new Greeter.GreeterClient(channel);
 
 var myTasks = new List<Task>();
@@ -29,5 +28,4 @@ async Task sayHello(Greeter.GreeterClient client, int i)
 {
     var reply = await client.SayHelloAsync(
         new HelloRequest { Name = $"GreeterClient::{i}", Count = i.ToString() });
-    //Console.WriteLine("Server response: " + reply.Message);
 }
