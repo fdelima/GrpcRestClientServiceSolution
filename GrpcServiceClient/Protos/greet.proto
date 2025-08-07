@@ -1,22 +1,66 @@
+/* 
+	Define a sintaxe do arquivo proto como proto3, que é a versão mais recente e recomendada.
+	'syntax': Especifica a versão da linguagem Protocol Buffers utilizada neste arquivo. 
+	A palavra-chave 'syntax' é obrigatória e informa ao compilador qual versão da 
+	linguagem deve ser usada para interpretar o arquivo. 
+	Aqui, 'proto3' indica a terceira versão, que traz melhorias de sintaxe e recursos 
+	relação à versão anterior.
+*/
 syntax = "proto3";
 
+/* 
+	Define o namespace C# para as classes geradas, facilitando a integração com projetos .NET.
+	'option': Define opções específicas para o arquivo proto. 
+	A palavra-chave 'option' permite configurar parâmetros adicionais para a geração de código.
+	Neste caso, 'csharp_namespace' define o namespace C# que será utilizado nas classes geradas 
+	a partir deste arquivo .proto, organizando o código e evitando conflitos de nomes.
+*/
 option csharp_namespace = "GrpcGreeterClient";
 
-package greet;
+/* 
+	Agrupa as mensagens e serviços deste arquivo sob o pacote 'greet'.
+	'package': Define o pacote proto, útil para organização e geração de código. 
+	A palavra-chave 'package' agrupa serviços e mensagens sob um mesmo nome, 
+	facilitando a organização e evitando conflitos de nomes em projetos grandes.
+*/
+package greet; 
 
-// The greeting service definition.
+/*
+	Define o serviço gRPC chamado 'Greeter', que contém métodos remotos (RPCs) 
+	que podem ser chamados por clientes gRPC.
+	A palavra-chave 'service' é usada para declarar um serviço gRPC, 
+	que é um conjunto de métodos que podem ser invocados remotamente.
+*/
 service Greeter {
-  // Sends a greeting
-  rpc SayHello (HelloRequest) returns (HelloReply);
+
+  /*
+	'rpc': Define um método remoto (Remote Procedure Call) do serviço.
+	A palavra-chave 'rpc' é usada para declarar um método que pode ser chamado remotamente 
+	por um cliente gRPC. O nome do método é 'SayHello', e ele recebe uma mensagem 
+	'HelloRequest' como entrada e retorna uma mensagem 'HelloReply' como saída.
+  */
+  rpc SayHello (HelloRequest) returns (HelloReply); 
+
 }
 
-// The request message containing the user's name.
+// Define a mensagem de requisição contendo os dados do usuário
 message HelloRequest {
+
+	/*
+	Define um campo do tipo string chamado 'name' com o identificador 1.
+	Este campo é usado para receber o nome do usuário que será saudado.
+	O identificador é único dentro da mensagem e é usado para serialização/deserialização.
+  */
   string name = 1;
-  string count = 2;
+
+
+  // Campo do tipo string chamado 'count', identificador 2
+  string count = 2; // Quantidade de saudações.
 }
 
-// The response message containing the greetings.
+// Define a mensagem de resposta contendo a saudação
 message HelloReply {
-  string message = 1;
+
+  // Campo do tipo string chamado 'message', identificador 1
+  string message = 1; // Mensagem de saudação retornada ao cliente.
 }

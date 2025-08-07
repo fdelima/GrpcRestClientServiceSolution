@@ -2,7 +2,7 @@
 using Grpc.Net.Client;
 using GrpcGreeterClient;
 
-const string port = "8080"; // "7246";
+const string port = "8080";
 
 Console.WriteLine($"Starting gRPC client listen port {port}...");
 

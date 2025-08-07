@@ -2,7 +2,7 @@
 
 using var httpClient = new HttpClient();
 
-const string port = "8082"; // "7262";
+const string port = "8082";
 
 Console.WriteLine($"Starting REST client listen port {port}...");
 
