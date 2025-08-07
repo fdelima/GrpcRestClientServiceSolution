@@ -27,5 +27,5 @@ Console.WriteLine($"Tempo gasto para execução de 250.000: {stopwatch.Elapsed}"
 async Task sayHello(Greeter.GreeterClient client, int i)
 {
     var reply = await client.SayHelloAsync(
-        new HelloRequest { Name = $"GreeterClient::{i}", Count = i.ToString() });
+        new HelloRequest { Name = $"GreeterClient::{i}", Count = i });
 }

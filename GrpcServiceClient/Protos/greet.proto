@@ -54,8 +54,8 @@ message HelloRequest {
   string name = 1;
 
 
-  // Campo do tipo string chamado 'count', identificador 2
-  string count = 2; // Quantidade de saudações.
+  // Campo do tipo inteiro chamado 'count', identificador 2
+  int32 count = 2; // Quantidade de saudações.
 }
 
 // Define a mensagem de resposta contendo a saudação
