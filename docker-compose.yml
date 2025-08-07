@@ -2,22 +2,13 @@ name: grpc-rest-solution
 
 services:
   grpcserviceclient:
-    image: ${DOCKER_REGISTRY-}grpcserviceclient
+    image: ${DOCKER_REGISTRY-}grpcserviceclient:docker
     build:
       context: .
       dockerfile: GrpcServiceClient/Dockerfile
-    # networks:
-    #   - POC-GrpcRest
 
   restserviceclient:
-    image: ${DOCKER_REGISTRY-}restserviceclient
+    image: ${DOCKER_REGISTRY-}restserviceclient:docker
     build:
       context: .
       dockerfile: RestServiceClient/Dockerfile
-#     networks:
-#       - POC-GrpcRest
-
-# networks:
-#   POC-GrpcRest:
-#     driver: bridge
-
