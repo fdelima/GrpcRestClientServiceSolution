@@ -12,9 +12,9 @@ var client = new Greeter.GreeterClient(channel);
 
 var myTasks = new List<Task>();
 var stopwatch = Stopwatch.StartNew();
-for (int i = 0; i < 250000; i++)
+for (int i = 1; i <= 250000; i++)
 {
-    if (i > 0 && i % 50000 == 0)
+    if (i > 1 && i % 50000 == 0)
         Console.WriteLine($"Send 50.000 sayHello: {DateTime.Now:HH:mm:ss}");
 
     myTasks.Add(sayHello(client, i));
