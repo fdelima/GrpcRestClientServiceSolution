@@ -6,18 +6,12 @@ services:
     build:
       context: .
       dockerfile: GrpcServiceClient/Dockerfile
-    # networks:
-    #   - POC-GrpcRest
 
   restserviceclient:
     image: ${DOCKER_REGISTRY-}restserviceclient
     build:
       context: .
       dockerfile: RestServiceClient/Dockerfile
-#     networks:
-#       - POC-GrpcRest
 
-# networks:
-#   POC-GrpcRest:
-#     driver: bridge
-
+  grafana:
+    image: grafana/grafana

@@ -1,0 +1,6 @@
+services:
+  grafana:
+    ports:
+      - "3000:3000"
+    volumes:
+      - C:\Users\ferna\source\repos\fdelima\GrpcRestClientServiceSolution\grafana-data:/var/lib/grafana grafana/grafana
