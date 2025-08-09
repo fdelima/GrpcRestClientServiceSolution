@@ -2,30 +2,40 @@
 using Grpc.Net.Client;
 using GrpcGreeterClient;
 
-const string port = "8080";
+const string _port = "8080";
+const int _totalRequests = 150000;
+const int _totalBatch = 50000;
+const int _waitingTime= 10000;
 
-Console.WriteLine($"Starting gRPC client listen port {port}...");
+Console.WriteLine($"Starting gRPC client listen port {_port}...");
 
 // The port number must match the port of the gRPC server.
-using var channel = GrpcChannel.ForAddress($"http://grpcserviceserver:{port}");
+using var channel = GrpcChannel.ForAddress($"http://grpcserviceserver:{_port}");
 var client = new Greeter.GreeterClient(channel);
-
-var myTasks = new List<Task>();
-var stopwatch = Stopwatch.StartNew();
-for (int i = 1; i <= 250000; i++)
-{
-    if (i > 1 && i % 50000 == 0)
-        Console.WriteLine($"Send 50.000 sayHello: {DateTime.Now:HH:mm:ss}");
-
-    myTasks.Add(sayHello(client, i));
-}
-Task.WaitAll(myTasks);
-
-stopwatch.Stop();
-Console.WriteLine($"Tempo gasto para execução de 250.000: {stopwatch.Elapsed}");
 
 async Task sayHello(Greeter.GreeterClient client, int i)
 {
     var reply = await client.SayHelloAsync(
         new HelloRequest { Name = $"GreeterClient::{i}", Count = i });
+}
+
+var myTasks = new List<Task>();
+var stopwatch = Stopwatch.StartNew();
+while (true)
+{
+    for (int i = 1; i <= _totalRequests; i++)
+    {
+        if (i > 1 && i % _totalBatch == 0)
+            Console.WriteLine($"Send {_totalBatch:#,##0,000} sayHello: {DateTime.Now:HH:mm:ss}");
+
+        myTasks.Add(sayHello(client, i));
+    }
+    Task.WaitAll(myTasks);
+
+    stopwatch.Stop();
+    Console.WriteLine($"Tempo gasto para execução de {_totalRequests:,##0,000}: {stopwatch.Elapsed}");
+
+    myTasks.Clear();
+    Thread.Sleep(_waitingTime);
+    stopwatch = Stopwatch.StartNew();
 }

@@ -12,3 +12,6 @@ services:
     build:
       context: .
       dockerfile: RestServiceClient/Dockerfile
+
+  grafana:
+    image: grafana/grafana
