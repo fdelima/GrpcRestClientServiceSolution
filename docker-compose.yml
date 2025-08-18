@@ -13,5 +13,5 @@ services:
       context: .
       dockerfile: RestServiceClient/Dockerfile
 
-  grafana:
-    image: grafana/grafana
+  # grafana:
+  #   image: grafana/grafana

@@ -1,9 +1,9 @@
 ﻿using System.Diagnostics;
 
 const string _port = "8082";
-const int _totalRequests = 150000;
-const int _totalBatch = 50000;
-const int _waitingTime = 10000;
+const int _totalRequests = 50000;
+const int _totalBatch = 25000;
+const int _waitingTime = 1000;
 
 using var httpClient = new HttpClient();
 

@@ -3,9 +3,9 @@ using Grpc.Net.Client;
 using GrpcGreeterClient;
 
 const string _port = "8080";
-const int _totalRequests = 150000;
-const int _totalBatch = 50000;
-const int _waitingTime= 10000;
+const int _totalRequests = 50000;
+const int _totalBatch = 25000;
+const int _waitingTime= 1000;
 
 Console.WriteLine($"Starting gRPC client listen port {_port}...");
 
